@@ -28,7 +28,7 @@ const Interface = forwardRef(({ canStart, started, animationEnded, playbackOn, t
             setSnack({ open: true, message, type });
         },
     }));
-      
+
     function closeSnack() {
         setSnack({...snack, open: false});
     }
@@ -42,7 +42,7 @@ const Interface = forwardRef(({ canStart, started, animationEnded, playbackOn, t
             setShowTutorial(false);
             return;
         }
-        
+
         setActiveStep(Math.max(activeStep + direction, 0));
     }
 
@@ -55,7 +55,7 @@ const Interface = forwardRef(({ canStart, started, animationEnded, playbackOn, t
         }
         toggleAnimation();
     }
-    
+
     function closeMenu() {
         setMenuAnchor(null);
     }
@@ -113,7 +113,7 @@ const Interface = forwardRef(({ canStart, started, animationEnded, playbackOn, t
                     <Slider disabled={!animationEnded}  value={animationEnded ? time : maxTime} min={animationEnded ? 0 : -1} max={maxTime} onChange={(e) => {timeChanged(Number(e.target.value));}} className="slider" aria-labelledby="playback-slider" />
                 </div>
                 <IconButton disabled={!canStart} onClick={handlePlay} style={{ backgroundColor: "#46B780", width: 60, height: 60 }} size="large">
-                    {(!started || animationEnded && !playbackOn) 
+                    {(!started || animationEnded && !playbackOn)
                         ? <PlayArrow style={{ color: "#fff", width: 26, height: 26 }} fontSize="inherit" />
                         : <Pause style={{ color: "#fff", width: 26, height: 26 }} fontSize="inherit" />
                     }
@@ -148,24 +148,24 @@ const Interface = forwardRef(({ canStart, started, animationEnded, playbackOn, t
                 </Fade>
             </div>
 
-            <Snackbar 
-                anchorOrigin={{ vertical: "bottom", horizontal: "right" }} 
-                open={snack.open} 
-                autoHideDuration={4000} 
+            <Snackbar
+                anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                open={snack.open}
+                autoHideDuration={4000}
                 onClose={closeSnack}>
-                <Alert 
-                    onClose={closeSnack} 
-                    severity={snack.type} 
+                <Alert
+                    onClose={closeSnack}
+                    severity={snack.type}
                     style={{ width: "100%", color: "#fff" }}
                 >
                     {snack.message}
                 </Alert>
             </Snackbar>
 
-            <Snackbar 
-                anchorOrigin={{ vertical: "top", horizontal: "center" }} 
-                open={helper} 
-                autoHideDuration={helperTime.current} 
+            <Snackbar
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                open={helper}
+                autoHideDuration={helperTime.current}
                 onClose={closeHelper}
             >
                 <div className="cinematic-alert">
@@ -307,7 +307,7 @@ const Interface = forwardRef(({ canStart, started, animationEnded, playbackOn, t
                                 horizontal: "right",
                             }}
                         >
-                            {LOCATIONS.map(location => 
+                            {LOCATIONS.map(location =>
                                 <MenuItem key={location.name} onClick={() => {
                                     closeMenu();
                                     changeLocation(location);
@@ -320,7 +320,7 @@ const Interface = forwardRef(({ canStart, started, animationEnded, playbackOn, t
                         <Typography id="area-slider" >
                             Area radius: {settings.radius}km ({(settings.radius / 1.609).toFixed(1)}mi)
                         </Typography>
-                        <Slider disabled={started && !animationEnded} min={2} max={20} step={1} value={settings.radius} onChangeCommited={() => { changeRadius(settings.radius); }} onChange={e => { setSettings({...settings, radius: Number(e.target.value)}); }} className="slider" aria-labelledby="area-slider" style={{ marginBottom: 1 }} 
+                        <Slider disabled={started && !animationEnded} min={2} max={20} step={1} value={settings.radius} onChangeCommited={() => { changeRadius(settings.radius); }} onChange={e => { setSettings({...settings, radius: Number(e.target.value)}); }} className="slider" aria-labelledby="area-slider" style={{ marginBottom: 1 }}
                             marks={[
                                 {
                                     value: 2,
@@ -330,7 +330,7 @@ const Interface = forwardRef(({ canStart, started, animationEnded, playbackOn, t
                                     value: 20,
                                     label: "20km"
                                 }
-                            ]} 
+                            ]}
                         />
                     </div>
 
@@ -345,7 +345,7 @@ const Interface = forwardRef(({ canStart, started, animationEnded, playbackOn, t
                         <Typography style={{ color: "#A8AFB3", textTransform: "uppercase", fontSize: 14 }} >
                             Styles
                         </Typography>
-                        
+
                         <div>
                             <Typography id="start-fill-label" >
                                 Start node fill color
@@ -445,7 +445,7 @@ const Interface = forwardRef(({ canStart, started, animationEnded, playbackOn, t
                 </div>
             </Drawer>
 
-            <a href="https://github.com/honzaap/Pathfinding" aria-label="GitHub repository" target="_blank" className={`github-corner ${cinematic ? "cinematic" : ""}`}>
+            <a href="https://github.com/MokiMeow/path-find" aria-label="GitHub repository" target="_blank" className={`github-corner ${cinematic ? "cinematic" : ""}`}>
                 <svg width="60" height="60" viewBox="0 0 250 250">
                     <path fill="#2A2B37" d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" className="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" className="octo-body"></path>
                 </svg>

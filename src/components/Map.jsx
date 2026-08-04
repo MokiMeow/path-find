@@ -1,8 +1,7 @@
 import DeckGL from "@deck.gl/react";
-import { Map as MapGL } from "react-map-gl";
-import maplibregl from "maplibre-gl";
+import { Map as MapGL } from "react-map-gl/maplibre";
 import { PolygonLayer, ScatterplotLayer } from "@deck.gl/layers";
-import { FlyToInterpolator } from "deck.gl";
+import { FlyToInterpolator } from "@deck.gl/core";
 import { TripsLayer } from "@deck.gl/geo-layers";
 import { createGeoJSONCircle } from "../helpers";
 import { useEffect, useRef, useState } from "react";
@@ -338,7 +337,7 @@ function Map() {
                         getLineColor={d => d.lineColor}
                     />
                     <MapGL
-                        reuseMaps mapLib={maplibregl}
+                        reuseMaps
                         mapStyle={MAP_STYLE}
                         doubleClickZoom={false}
                     />

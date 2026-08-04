@@ -2,12 +2,13 @@ import { useState, useEffect, useRef } from "react";
 
 function useSmoothStateChange(initialState, fromValue, toValue, duration, trigger, reverse) {
     const [state, setState] = useState(initialState);
-    const startTime = Date.now();
     const animationFrameRef = useRef();
 
     useEffect(() => {
-        function updateState() {
-            const currentTime = Date.now();
+        if (!trigger) return undefined;
+
+        const startTime = performance.now();
+        function updateState(currentTime) {
             const elapsedTime = currentTime - startTime;
 
             if (elapsedTime < duration) {
@@ -25,13 +26,11 @@ function useSmoothStateChange(initialState, fromValue, toValue, duration, trigge
             }
         }
 
-        if (trigger) {
-            animationFrameRef.current = requestAnimationFrame(updateState);
+        animationFrameRef.current = requestAnimationFrame(updateState);
 
-            return () => {
-                cancelAnimationFrame(animationFrameRef.current);
-            };
-        }
+        return () => {
+            cancelAnimationFrame(animationFrameRef.current);
+        };
     }, [fromValue, toValue, duration, trigger, reverse]);
 
     return state;
